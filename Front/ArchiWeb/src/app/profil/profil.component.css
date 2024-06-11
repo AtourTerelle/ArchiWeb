@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url('/assets/images/banniere.jpg');
+    background-size: cover;
+    padding: 10px 20px;
+    border-radius: 1em;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px; /* Ajuster selon la taille réelle de l'image */
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #003366;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.user-info span {
+    display: block;
+    font-size: 1em;
+    color: #003366;
+    margin-bottom: 5px;
+}
+
+.user-info nav a {
+    text-decoration: none;
+    color: #003366;
+    margin-left: 15px;
+}
+
+.Retour {
+    text-decoration: none;
+    color: #003366;
+    margin: 15px;
+}
+
+.user-info nav a img {
+    vertical-align: middle;
+    height: 20px; /* Ajuster selon la taille réelle des icônes */
+    margin-right: 5px;
+}
+
+.container {
+    border: 2px solid #E8B1CA;
+    border-radius: 8px;
+    max-width: 90%;
+    margin: 20px auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #E8B1CA;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+}
+
+.header h2 {
+    padding-left: 10px;
+}
+
+.Field {
+    padding: 25px;
+}
+
+.Field input{
+    border-radius: 8px;
+    width: 30%;
+    height: 30px;
+}
+
+form .button {
+    margin-left: 100px;
+    margin-bottom: 30px;
+    background-color: #003366;
+    color: white;
+    width: 20%;
+    height: 40px;
+    border-radius: 8px;
+}
