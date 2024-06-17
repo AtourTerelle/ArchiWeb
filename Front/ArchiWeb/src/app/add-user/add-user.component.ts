@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-home-admin',
+  selector: 'app-add-user',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './home-admin.component.html',
-  styleUrl: './home-admin.component.css'
+  templateUrl: './add-user.component.html',
+  styleUrl: './add-user.component.css'
 })
-export class HomeAdminComponent {
+export class AddUserComponent {
   Name: string = "Milo Pauchet"
 }

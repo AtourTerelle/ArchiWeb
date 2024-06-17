@@ -1,0 +1,44 @@
+<div>
+    <header>
+        <div class="logo">
+            <img src="assets/images/Logoupjv-bleu.png" alt="Logo Université de Picardie Jules Verne">
+            <span>Gestion <br> <i>Matériels</i></span>
+        </div>
+        <div class="user-info">
+            <span>Bienvenue {{Name}}</span>
+            <nav>
+                <a routerLink="/home/profil"><img src="assets/images/personne.png" alt="Profil"> Profil</a>
+                <a href="#deconnexion"><img src="assets/images/deco.png" alt="Déconnexion"> Déconnexion</a>
+            </nav>
+        </div>
+    </header>
+    <body>
+        <nav>
+            <a routerLink="/home">Retour</a>
+        </nav>
+        <div class="container">
+            <div class="header">
+                <img src="assets/images/Profil.png" alt="Icon Matériels" class="icon">
+                <h2>Création d'un matériel</h2>
+            </div>
+            <form>
+                <div class="Field">
+                    <h3>Nom du matériel</h3>
+                    <input type="text"/>
+                </div>
+                <div class="Field">
+                    <h3>Description</h3>
+                    <input type="text"/>
+                </div>
+                <div class="Field">
+                    <h3>Catégorie</h3>
+                    <select>
+                        <option value="ordinateur">Ordinateur</option>
+                        <option value="meuble">Meuble</option>
+                    </select>
+                </div>
+                <input type="submit" class="button" value="Créer"/>
+            </form>
+        </div>
+    </body>
+</div>

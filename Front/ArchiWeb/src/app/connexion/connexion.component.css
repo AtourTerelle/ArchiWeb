@@ -4,7 +4,7 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-.background {
+.backgroundConnexion {
     background-image: url('/assets/images/backgroundUPJV.jpg'); /* Chemin vers ton image de fond */
     background-size: cover;
     background-position: center;
@@ -30,7 +30,7 @@ body, html {
     text-align: center;
 }
 
-.logo {
+.backgroundLogo {
     max-width: 100px;
     margin-bottom: 20px;
 }
@@ -47,7 +47,7 @@ body, html {
 }
 
 .input-group input {
-    width: 100%;
+    width: 94%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
