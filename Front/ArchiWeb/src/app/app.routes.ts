@@ -7,7 +7,10 @@ import { isConnectedGuard } from './is_connected.guard';
 
 export const routes: Routes = [
     {path:'', component: ConnexionComponent},
-    {path:'home', component: HomeComponent},
+    {path:'home', component: HomeAdminComponent},
+    {path:'home/Users', component: UserPanelComponent},
+    {path:'home/Users/Add', component: AddUserComponent},
+    {path:'home/AddMaterials', component: AddMaterielComponent},
     {path:'home/profil', component: ProfilComponent, canActivate:[isConnectedGuard]},
     {path:'**', component: ErrorComponent}
 ];
