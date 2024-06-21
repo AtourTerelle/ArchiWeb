@@ -26,6 +26,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/ArchiWeb", {
   console.error('MongoDB connection error:', err);
 });
 
+/*const utilisateursRouter = require('./Router/rou_utilisateurs');
+app.use('/utilisateurs', utilisateursRouter);*/
 require('./Router/rou_utilisateurs')(app)
 
 srv = http.createServer({
