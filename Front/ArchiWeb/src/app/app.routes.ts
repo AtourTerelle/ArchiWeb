@@ -4,6 +4,10 @@ import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { ProfilComponent } from './profil/profil.component';
 import { isConnectedGuard } from './is_connected.guard';
+import { UserPanelComponent } from './user-panel/user-panel.component';
+import { AddMaterielComponent } from './add-materiel/add-materiel.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 export const routes: Routes = [
     {path:'', component: ConnexionComponent},

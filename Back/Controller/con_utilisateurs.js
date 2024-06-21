@@ -13,18 +13,26 @@ exports.getUser = async (req, res) => {
 exports.addutilisateurs = async (req, res) => {
 
     try {
-        const user = await utilisateurs({ 
-            pseudo_u: req.body.pseudo_u,
-            mpd_u: req.body.mpd_u,
-            role_u: req.body.role_u,
-        });
+        //console.log(req)
+        console.log(req.body)
+        console.log(req.body.mdp_u)
+
+        const {pseudo_u, mdp_u, role_u} = req.body;
+
+        const user = new utilisateurs({ 
+            pseudo_u,
+            mdp_u,
+            role_u,
+        })
 
         await user.save();
 
         res.status(200).json({message: "Success"});
     } catch (e) {
-        res.status(400).json({message: "Error"});
+        console.log(e)
+        res.status(400).json({message: "Error", });
     }
+    
 }
 
 exports.modifutilisateurs = async (req, res) => {
