@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const utilisateurs = require("../Model/utilisateurs");
 
+const JWT_SECRET = 'La_clef_pas_cacher_la';
+
 exports.getUser = async (req, res) => {
 
     try {
@@ -63,42 +65,40 @@ exports.modifutilisateurs = async (req, res) => {
     } catch (e) {
         res.status(400).json({message: "Error"});
     }
-
-    exports.connexion = async (req, res) => {
-        try {
-            const { pseudo, mdp } = req.body;
-    
-            // Trouver l'utilisateur par e-mail
-            const utilisateur = await utilisateurs.findOne({pseudo_u: pseudo});
-
-            console.log(utilisateur.pseudo_u);
-    
-            if (!utilisateur) {
-                return res.status(401).json({ message: 'Utilisateur inexistant' });
-            }
-    
-            // Comparer le mot de passe
-            /*const isMatch = await bcrypt.compare(mdp, utilisateur.mdp_u);
-    
-            if (!isMatch) {
-                return res.status(401).json({ message: 'mot de passe incorect' });
-            }*/
-           if(mdp!=utilisateur.mdp_u){
-                return res.status(401).json({ message: 'mot de passe incorect' });
-           }
-    
-            // Créer un jeton JWT
-            const token = jwt.sign(
-                { id_u: utilisateur.id_u, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
-                process.env.JWT_SECRET,
-                { expiresIn: '1h' }
-            );
-
-            //await utilisateur.save();
-    
-            res.status(200).json({ token });
-        } catch (e) {
-            res.status(500).json({ message: 'Erreur du serveur', error: e.message });
-        }
-    }    
 }
+exports.connexion = async (req, res) => {
+
+    try {
+        console.log(req.body);
+        const { pseudo_u, mdp_u } = req.body;
+        
+        // Trouver l'utilisateur par e-mail
+        const utilisateur = await utilisateurs.findOne({pseudo_u: pseudo_u});
+    
+        if (!utilisateur) {
+            return res.status(401).json({ message: 'Utilisateur inexistant' });
+        }
+    
+        // Comparer le mot de passe
+        const isMatch = await bcrypt.compare(mdp_u, utilisateur.mdp_u);
+    
+        if (!isMatch) {
+            return res.status(401).json({ message: 'mot de passe incorect' });
+        }
+        
+        console.log("test 3");
+
+        // Créer un jeton JWT
+        const token = jwt.sign(
+            { id_u: utilisateur.id_u, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
+            //process.env.JWT_SECRET,
+            JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+        
+        //res.status(200).json({utilisateur, token});
+        return res.status(200).send({token})
+    } catch (e) {
+        res.status(500).json({ message: 'Erreur du serveur', error: e.message });
+    }
+}    

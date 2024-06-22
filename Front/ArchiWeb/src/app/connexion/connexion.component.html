@@ -4,14 +4,14 @@
             <div class="login-container">
                 <div class="login-form">
                     <img src="assets/images/Logoupjv-bleu.png" alt="Université de Picardie Jules Verne" class="backgroundLogo">
-                    <form>
+                    <form [formGroup]="connexionForm" (ngSubmit) = "onSubmit()">
                         <div class="input-group">
                             <label for="username">Identifiant</label>
-                            <input type="text" id="username" name="username" placeholder="Identifiant" required>
+                            <input type="text" id="username" name="username" placeholder="Identifiant" formControlName="pseudo" required>
                         </div>
                         <div class="input-group">
                             <label for="password">Mot de passe</label>
-                            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                            <input type="password" id="password" name="password" placeholder="Mot de passe" formControlName="mdp" required>
                         </div>
                         <button type="submit" class="login-button">Connexion</button>
                     </form>
