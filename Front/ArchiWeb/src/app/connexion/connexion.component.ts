@@ -39,6 +39,7 @@ export class ConnexionComponent {
           next: (response) => {
             if(response.token){
               localStorage.setItem('authToken', response.token);
+              this.router.navigate(['home'])
               console.log('connexion reussi', response);
             }
             else{
