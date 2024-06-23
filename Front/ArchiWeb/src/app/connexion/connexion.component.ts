@@ -40,7 +40,11 @@ export class ConnexionComponent {
             if(response.token && response.role){
               localStorage.setItem('authToken', response.token);
               localStorage.setItem('role', response.role);
-              this.router.navigate(['home'])
+              if (response.role == "admin"){
+                this.router.navigate(['home'])
+              }else{
+                this.router.navigate(['home/Users'])
+              }
               console.log('connexion reussi', response);
             }
             else{
