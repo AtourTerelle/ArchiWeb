@@ -74,7 +74,8 @@ exports.connexion = async (req, res) => {
         
         // Trouver l'utilisateur par e-mail
         const utilisateur = await utilisateurs.findOne({pseudo_u: pseudo_u});
-    
+        const role = utilisateur.role_u
+
         if (!utilisateur) {
             return res.status(401).json({ message: 'Utilisateur inexistant' });
         }
@@ -97,7 +98,7 @@ exports.connexion = async (req, res) => {
         );
         
         //res.status(200).json({utilisateur, token});
-        return res.status(200).send({token})
+        return res.status(200).send({token, role})
     } catch (e) {
         res.status(500).json({ message: 'Erreur du serveur', error: e.message });
     }

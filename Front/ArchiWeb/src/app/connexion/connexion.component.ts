@@ -37,8 +37,9 @@ export class ConnexionComponent {
       this.http.post<any>('http://localhost:5000/connexion', userData, {headers})
         .subscribe({
           next: (response) => {
-            if(response.token){
+            if(response.token && response.role){
               localStorage.setItem('authToken', response.token);
+              localStorage.setItem('role', response.role);
               this.router.navigate(['home'])
               console.log('connexion reussi', response);
             }

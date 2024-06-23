@@ -8,13 +8,14 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
 import { AddMaterielComponent } from './add-materiel/add-materiel.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { AdminGuard } from './AdminGuard';
 
 export const routes: Routes = [
     {path:'', component: ConnexionComponent},
     {path:'home', component: HomeAdminComponent},
     {path:'home/Users', component: UserPanelComponent},
     {path:'home/Users/Add', component: AddUserComponent},
-    {path:'home/AddMaterials', component: AddMaterielComponent},
+    {path:'home/AddMaterials', component: AddMaterielComponent, canActivate:[AdminGuard]},
     {path:'home/profil', component: ProfilComponent, canActivate:[isConnectedGuard]},
     {path:'**', component: ErrorComponent}
 ];

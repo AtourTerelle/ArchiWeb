@@ -1,11 +1,11 @@
 import { CanActivateFn } from '@angular/router';
 import { Router } from '@angular/router';
 
-export const isConnectedGuard: CanActivateFn = (route, state) => {
+export const AdminGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('authToken');
   const role = localStorage.getItem('role');
 
-  if(!!token && role=="Utilisateur"){
+  if(!!token && role=="admin"){
     return true;
   }
   else{
