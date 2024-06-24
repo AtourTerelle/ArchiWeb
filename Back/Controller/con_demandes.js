@@ -37,3 +37,12 @@ exports.createDemande = async (req, res) => {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
 };
+
+exports.getDemandesEnAttente = async (req, res) => {
+    try {
+        const demandesEnAttente = await demandes.find({ en_attente: true })//.populate('user').populate('materiel');
+        res.status(200).json(demandesEnAttente);
+    } catch (error) {
+        res.status(500).json({ message: "Erreur du serveur", error: error.message });
+    }
+};
