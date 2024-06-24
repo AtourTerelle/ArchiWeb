@@ -45,24 +45,18 @@ exports.addutilisateurs = async (req, res) => {
 exports.modifutilisateurs = async (req, res) => {
 
     try {
+        const {pseudo_u, mdp_u} = req.body;
 
-        console.log(req.params)
+        const newMdp = mdp_u
 
-        const userId = req.params._id;
-
-        const {newPseudo, newMdp} = req.body;
-
-        console.log(req.body)
-
-        const user = await utilisateurs.findOne({ _id: userId});
-        
-
-        if (user) {
+        const user = await utilisateurs.findOne({ pseudo_u: pseudo_u});
+        if (!user) {
             return res.status(404).json({message: "Utilisateur non trouvé"})
         }
 
-        user.pseudo_u = newPseudo;
-        user.mpd_u = newMdp;
+        const hashedPassword = await bcrypt.hash(newMdp, 10);
+
+        user.mdp_u = hashedPassword;
 
         await user.save();
 
