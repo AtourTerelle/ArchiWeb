@@ -5,7 +5,7 @@ const demandeSchema = new mongoose.Schema({
     user_pseudo: { type: String, required: true },
     materiel_nom: { type: String, required: true },
     type_d: { type: String, required: true },
-    en_attente: { type: Boolean, required: true, default: true }
+    etats_d: { type: String, required: true, default: "EnAttente" }
 });
 
 module.exports = mongoose.model('demandes', demandeSchema);
