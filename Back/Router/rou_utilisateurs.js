@@ -7,4 +7,5 @@ module.exports = function(app){
     app.put('/modif_user', con_utilisateurs.modifutilisateurs);
     app.delete('/delete_user', con_utilisateurs.deleteutilisateurs);
     app.post('/connexion', con_utilisateurs.connexion);
+    app.get('/InfoToken', con_utilisateurs.UserInfoFromToken);
 }
