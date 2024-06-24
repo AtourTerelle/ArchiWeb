@@ -49,6 +49,10 @@ exports.modifutilisateurs = async (req, res) => {
 
         const newMdp = mdp_u
 
+        if(newMdp.length==0){
+            return res.status(404).json({message: "mdp vide"})
+        }
+
         const user = await utilisateurs.findOne({ pseudo_u: pseudo_u});
         if (!user) {
             return res.status(404).json({message: "Utilisateur non trouvé"})
