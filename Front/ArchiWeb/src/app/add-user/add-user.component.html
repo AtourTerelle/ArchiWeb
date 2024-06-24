@@ -21,18 +21,18 @@
                 <img src="assets/images/Profil.png" alt="Icon Matériels" class="icon">
                 <h2>Créer un utilisateur</h2>
             </div>
-            <form>
+            <form [formGroup]="addUserForm" (ngSubmit) = "onSubmit()">
                 <div class="Field">
                     <h3>Login</h3>
-                    <input type="text"/>
+                    <input type="text" formControlName="pseudo"/>
                 </div>
                 <div class="Field">
                     <h3>Mot de passe</h3>
-                    <input type="text"/>
+                    <input type="password" formControlName="mdp"/>
                 </div>
                 <div class="Field">
                     <h3>Role :</h3>
-                    <select>
+                    <select formControlName="role">
                         <option value="utilisteur">Utilisateur</option>
                         <option value="admin">Administrateur</option>
                     </select>
