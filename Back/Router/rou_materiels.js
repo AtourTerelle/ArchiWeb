@@ -6,6 +6,7 @@ module.exports = function(app){
     app.get('/materielsDispoByType', con_materiels.materielsDispoByType);
     app.post('/addMateriels', con_materiels.AddMateriels);
     app.delete('/deleteMateriels', con_materiels.deleteMateriels);
-
+    app.get('/allMateriel', con_materiels.allmateriels);
+    app.get('/materielReserve',con_materiels.materielsReserve);
     
 }
