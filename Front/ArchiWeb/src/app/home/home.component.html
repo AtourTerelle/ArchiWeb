@@ -11,34 +11,18 @@
                         <tr>
                             <th>Nom du matériel</th>
                             <th>Type</th>
+                            <th>Disponiblité</th>
+                            <th>Salle</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>HP-GAMING-01</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-02</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-03</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-04</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-05</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
+                        <tr *ngFor="let item of dataReserve">
+                            <td>{{item.nom_u}}</td>
+                            <td>{{item.type_m}}</td>
+                            <td>{{item.reserve_par}}</td>
+                            <td>{{item.salle}}</td>
+                            <td (click)="reserveItem(item.nom_m)"><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -61,34 +45,18 @@
                         <tr>
                             <th>Nom du matériel</th>
                             <th>Type</th>
+                            <th>Disponiblité</th>
+                            <th>Salle</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>HP-GAMING-01</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-02</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-03</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-04</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-05</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
+                        <tr *ngFor="let item of dataLibre">
+                            <td>{{item.nom_m}}</td>
+                            <td>{{item.type_m}}</td>
+                            <td>{{item.reserve_par}}</td>
+                            <td>{{item.salle}}</td>
+                            <td (click)="retourItem(item.nom_m)"><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
                         </tr>
                     </tbody>
                 </table>
