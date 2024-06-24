@@ -4,5 +4,7 @@ module.exports = function(app){
     
     app.get('/materielsDispo', con_materiels.materielsDispo);
     app.get('/materielsDispoByType/:type', con_materiels.materielsDispoByType);
+    app.post('/addMateriels', con_materiels.AddMateriels);
+
     
 }
