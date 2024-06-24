@@ -68,13 +68,14 @@ exports.modifutilisateurs = async (req, res) => {
 
 exports.deleteutilisateurs = async (req, res) => {
     try {
-        const { id } = req.params;
-        const deletedUser = await Utilisateur.findByIdAndDelete(id);
+        const { pseudo_u } = req.body;
+        const deletedUser = await utilisateurs.findOne({pseudo_u: pseudo_u});
 
         if (!deletedUser) {
             return res.status(404).json({ message: "Utilisateur non trouvé" });
         }
 
+        await deletedUser.deleteOne();
         res.status(200).json({ message: "Utilisateur supprimé avec succès" });
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
