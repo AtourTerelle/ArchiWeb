@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })
@@ -38,6 +38,7 @@ export class AddUserComponent {
         .subscribe(
           response => {
             console.log('Utilisateur ajouté avec succès', response);
+            this.router.navigate(['home/Users']);
           },
           error => {
             console.error('Erreur lors de l\'ajout de l\'utilisateur', error);

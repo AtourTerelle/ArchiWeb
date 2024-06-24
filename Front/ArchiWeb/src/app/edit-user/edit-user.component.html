@@ -8,13 +8,9 @@
         <div class="container">
             <div class="header">
                 <img src="assets/images/Profil.png" alt="Icon Matériels" class="icon">
-                <h2>Créer un utilisateur</h2>
+                <h2>Editer un utilisateur</h2>
             </div>
-            <form [formGroup]="addUserForm" (ngSubmit) = "onSubmit()">
-                <div class="Field">
-                    <h3>Login</h3>
-                    <input type="text" formControlName="pseudo"/>
-                </div>
+            <form [formGroup]="EditUserForm" (ngSubmit) = "onSubmit()">
                 <div class="Field">
                     <h3>Mot de passe</h3>
                     <input type="password" formControlName="mdp"/>
