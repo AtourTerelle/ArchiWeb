@@ -6,8 +6,7 @@
 .containerAdmin {
     border: 2px solid #4CAF50;
     border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
+    width: 93%;
     background-color: white;
     margin: auto;
     margin-top: 1%;
@@ -48,58 +47,6 @@
 
 .action-buttonAdmin:hover {
     background-color: #45a049;
-}
-
-
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-image: url('/assets/images/banniere.jpg');
-    background-size: cover;
-    padding: 10px 20px;
-    border-radius: 1em;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    height: 50px; /* Ajuster selon la taille réelle de l'image */
-    margin-right: 10px;
-}
-
-.logo span {
-    font-size: 1.5em;
-    font-weight: bold;
-    line-height: 1.2;
-    color: #003366;
-}
-
-.user-info {
-    text-align: right;
-}
-
-.user-info span {
-    display: block;
-    font-size: 1em;
-    color: #003366;
-    margin-bottom: 5px;
-}
-
-.user-info nav a {
-    text-decoration: none;
-    color: #003366;
-    margin-left: 15px;
-}
-
-.user-info nav a img {
-    vertical-align: middle;
-    height: 20px; /* Ajuster selon la taille réelle des icônes */
-    margin-right: 5px;
 }
 
 

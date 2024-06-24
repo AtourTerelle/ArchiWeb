@@ -12,4 +12,5 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'ArchiWeb';
+  Name: string = "Milo Pauchet"
 }

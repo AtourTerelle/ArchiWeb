@@ -1,21 +1,46 @@
 <div>
-    <header>
-        <div class="logo">
-            <img src="assets/images/Logoupjv-bleu.png" alt="Logo Université de Picardie Jules Verne">
-            <span>Gestion <br> <i>Matériels</i></span>
-        </div>
-        <div class="user-info">
-            <span>Bienvenue {{Name}}</span>
-            <nav>
-                <a routerLink="/home/profil"><img src="assets/images/personne.png" alt="Profil"> Profil</a>
-                <a href="#deconnexion"><img src="assets/images/deco.png" alt="Déconnexion"> Déconnexion</a>
-            </nav>
-        </div>
-    </header>
     <body>
-        <nav>
-            <a routerLink="/home">Retour</a>
-            <a routerLink="/home/Users/Add">Créer un utilisateur</a>
-        </nav>
+        <div class="containerAdmin">
+            <div class="headerAdmin">
+                <h2>Actions</h2>
+            </div>
+            <div class="button-containerAdmin">
+                <button class="action-buttonAdmin" routerLink="/home">Retour</button>
+                <button class="action-buttonAdmin" routerLink="/home/Users/Add">Créer un utilisateur</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header">
+                <img src="assets/images/MR.png" alt="Icon Matériels" class="icon">
+                <h2>Les utilisateurs</h2>
+            </div>
+            <div class="content">
+                <table class="material-table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of data">
+                            <td>{{item.pseudo_u}}</td>
+                            <td>{{item.role_u}}</td>
+                            <td>
+                                <button (click)="editItem(item)">Edit</button>
+                                <button (click)="deleteItem(item)">Supprimer</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="legend">
+                    <div class="legend-header">Légende</div>
+                    <div class="legend-content">
+                        <img src="assets/images/Arrow.png" alt="Retour matériel" class="legend-icon"> Retour matériel
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </div>
