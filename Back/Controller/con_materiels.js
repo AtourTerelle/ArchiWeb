@@ -11,10 +11,13 @@ exports.materielsDispo = async (req, res) => {
 
 exports.materielsDispoByType = async (req, res) => {
     try {
-        console.log(req.params)
-        const { type } = req.params;
-        const materielsdispo = await materiels.find({ Type: type, Reserve_par: null });
-        res.status(200).json(materielsdispo);
+        const { type } = req.body;
+
+        const materielsdispo = await materiels.find({ type_m: type, Reserve_par: null });
+        console.log(materielsdispo)
+
+
+        res.status(200).json({message: "Success", materielsdispo});
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
@@ -55,3 +58,34 @@ exports.AddMateriels = async (req, res) => {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
 };
+
+exports.deleteMateriels = async (req, res) => {
+    try {
+        const { id } = req.params; // Récupère l'ID du matériel à partir des paramètres de la requête
+        const deletedMateriel = await Materiel.findByIdAndDelete(id);
+
+        if (!deletedMateriel) {
+            return res.status(404).json({ message: "Matériel non trouvé" });
+        }
+
+        res.status(200).json({ message: "Matériel supprimé avec succès" });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur du serveur", error: error.message });
+    }
+};
+
+// Exemple avec id
+
+/*exports.materielsDispo = async (req, res) => {
+    try {
+        const _id = req.body._id
+
+        console.log(_id)
+
+        //const materieldispo = await materiels.find({ Reserve_par: null });
+        const materieldispo = await materiels.findById({_id});
+        res.status(200).json(materieldispo);
+    } catch (error) {
+        res.status(500).json({ message: "Erreur du serveur", error: error.message });
+    }
+};*/

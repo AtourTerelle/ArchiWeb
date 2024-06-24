@@ -66,6 +66,21 @@ exports.modifutilisateurs = async (req, res) => {
     }
 }
 
+exports.deleteutilisateurs = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await Utilisateur.findByIdAndDelete(id);
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
+
+        res.status(200).json({ message: "Utilisateur supprimé avec succès" });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur du serveur", error: error.message });
+    }
+};
+
 exports.connexion = async (req, res) => {
 
     try {
@@ -91,7 +106,7 @@ exports.connexion = async (req, res) => {
 
         // Créer un jeton JWT
         const token = jwt.sign(
-            { id_u: utilisateur.id_u, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
+            { id_u: utilisateur._id, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
             //process.env.JWT_SECRET,
             JWT_SECRET,
             { expiresIn: '1h' }
@@ -102,4 +117,5 @@ exports.connexion = async (req, res) => {
     } catch (e) {
         res.status(500).json({ message: 'Erreur du serveur', error: e.message });
     }
-}    
+}
+
