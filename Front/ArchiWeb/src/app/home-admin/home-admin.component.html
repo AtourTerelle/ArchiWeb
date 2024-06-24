@@ -9,60 +9,11 @@
                 <button class="action-buttonAdmin" routerLink="/home/AddMaterials">Création d'un matériel</button>
             </div>
         </div>
-        <div class="container">
-            <div class="header">
-                <img src="assets/images/MR.png" alt="Icon Matériels" class="icon">
-                <h2>Mes matériels réservés</h2>
-            </div>
-            <div class="content">
-                <table class="material-table">
-                    <thead>
-                        <tr>
-                            <th>Nom du matériel</th>
-                            <th>Type</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>HP-GAMING-01</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-02</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-03</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-04</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-05</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Arrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="legend">
-                    <div class="legend-header">Légende</div>
-                    <div class="legend-content">
-                        <img src="assets/images/Arrow.png" alt="Retour matériel" class="legend-icon"> Retour matériel
-                    </div>
-                </div>
-            </div>
-        </div>
+            
         <div class="containerBlue">
             <div class="headerBlue">
                 <img src="assets/images/MD.png" alt="Icon Matériels" class="icon">
-                <h2>Les matériels disponibles</h2>
+                <h2>Les matériels</h2>
             </div>
             <div class="content">
                 <table class="material-tableBlue">
@@ -70,43 +21,23 @@
                         <tr>
                             <th>Nom du matériel</th>
                             <th>Type</th>
+                            <th>Disponiblité</th>
+                            <th>Salle</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>HP-GAMING-01</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-02</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-03</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-04</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-05</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="action-icon"></td>
+                        <tr *ngFor="let item of dataAllMaterials">
+                            <td>{{item.nom_m}}</td>
+                            <td>{{item.type_m}}</td>
+                            <td>{{item.reserve_par}}</td>
+                            <td>{{item.salle}}</td>
+                            <td>
+                                <button (click)="deleteMaterial(item.nom_m)">Supprimer</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="legendBlue">
-                    <div class="legend-headerBlue">Légende</div>
-                    <div class="legend-content">
-                        <img src="assets/images/ReverseArrow.png" alt="Retour matériel" class="legend-icon"> Demande matériel
-                    </div>
-                </div>
             </div>
         </div>
         <div class="containerRed">

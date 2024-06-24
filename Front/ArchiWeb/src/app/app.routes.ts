@@ -17,7 +17,7 @@ export const routes: Routes = [
     {path:'home/Users', component: UserPanelComponent},
     {path:'home/Users/Add', component: AddUserComponent},
     {path:'home/Users/Edit/:id', component: EditUserComponent},
-    {path:'home/AddMaterials', component: AddMaterielComponent, canActivate:[AdminGuard]},
+    {path:'home/AddMaterials', component: AddMaterielComponent},
     {path:'home/profil', component: ProfilComponent, canActivate:[isConnectedGuard]},
     {path:'**', component: ErrorComponent}
 ];

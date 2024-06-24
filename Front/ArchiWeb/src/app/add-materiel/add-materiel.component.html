@@ -1,27 +1,26 @@
 <div>
     <body>
         <nav>
-            <a routerLink="/home">Retour</a>
+            <div class="button-containerAdmin">
+                <button class="action-buttonAdmin" routerLink="/home">Retour</button>
+            </div>
         </nav>
         <div class="container">
             <div class="header">
                 <img src="assets/images/Profil.png" alt="Icon Matériels" class="icon">
                 <h2>Création d'un matériel</h2>
             </div>
-            <form>
+            <form [formGroup]="addMaterialForm" (ngSubmit) = "onSubmit()">
                 <div class="Field">
                     <h3>Nom du matériel</h3>
-                    <input type="text"/>
-                </div>
-                <div class="Field">
-                    <h3>Description</h3>
-                    <input type="text"/>
+                    <input type="text" formControlName="name"/>
                 </div>
                 <div class="Field">
                     <h3>Catégorie</h3>
-                    <select>
+                    <select formControlName="type">
                         <option value="ordinateur">Ordinateur</option>
                         <option value="meuble">Meuble</option>
+                        <option value="imprimante">Imprimante</option>
                     </select>
                 </div>
                 <input type="submit" class="button" value="Créer"/>
