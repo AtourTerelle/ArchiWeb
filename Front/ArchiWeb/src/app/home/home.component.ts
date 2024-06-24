@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
+import { RequestPopUpComponent } from '../request-pop-up/request-pop-up.component';
+import { DataTranferServiceService } from '../data-tranfer-service.service';
 
 @Component({
   selector: 'app-home',
@@ -13,23 +16,27 @@ import { Router, RouterLink } from '@angular/router';
 export class HomeComponent implements OnInit{
   dataLibre: any[] = [];
   dataReserve: any[] = [];
+  dataTickets: any[] = [];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog, private dataTransferService: DataTranferServiceService) { }
   
   ngOnInit(): void {
     this.http.get<any[]>('http://localhost:5000/materielsDispo').subscribe((response: any[]) => {
       this.dataLibre = response;
     });
 
-
-
     this.http.get<any[]>('http://localhost:5000/materielReserve').subscribe((response: any[]) => {
       this.dataReserve = response;
     });
   }
 
-  reserveItem(item: string) {
-    console.log("reserver : ", item)
+  reserveItem(item: any) {
+    this.dataTransferService.setItem(item);
+    this.dialog.open(RequestPopUpComponent, {
+      width: '500px',
+      height: '300px',
+      data: {name : item.nom_m}
+    })
   }
 
   retourItem(item: string){

@@ -1,0 +1,16 @@
+<div class="popup-container">
+  <div class="popup">
+      <h2>Demande de matériel {{data.name}}</h2>
+      <form [formGroup]="addDemandeForm" (ngSubmit) = "submit()">
+          <div class="form-group">
+            <label for="room-number">Numéro de la salle</label>
+            <input type="text" id="room-number" name="room-number" formControlName="salle">
+          </div>
+          <div class="buttons">
+              <button class="button button-secondary" (click)="close()">Retour</button>
+              <button class="button button-primary" type="submit">Envoyer</button>
+          </div>
+      </form>
+      
+  </div>
+</div>

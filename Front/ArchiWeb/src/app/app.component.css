@@ -10,7 +10,7 @@ header {
     background-image: url('/assets/images/banniere.jpg');
     background-size: cover;
     padding: 10px 20px;
-    border-radius: 1em;
+    border-radius: 0 0 1em 1em;
 }
 
 .logo {
