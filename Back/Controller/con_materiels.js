@@ -61,13 +61,16 @@ exports.AddMateriels = async (req, res) => {
 
 exports.deleteMateriels = async (req, res) => {
     try {
-        const { id } = req.params; // Récupère l'ID du matériel à partir des paramètres de la requête
-        const deletedMateriel = await Materiel.findByIdAndDelete(id);
+        const { nom_m } = req.body;
+ 
+        //const deletedMateriel = await Materiel.findByIdAndDelete(id);
 
+        const deletedMateriel = await materiels.findOne({nom_m: nom_m});
         if (!deletedMateriel) {
             return res.status(404).json({ message: "Matériel non trouvé" });
         }
-
+        
+        await deletedMateriel.deleteOne();
         res.status(200).json({ message: "Matériel supprimé avec succès" });
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
