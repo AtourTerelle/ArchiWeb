@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { DataTranferServiceService } from '../data-tranfer-service.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,35 +10,24 @@ import { DataTranferServiceService } from '../data-tranfer-service.service';
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.css'
 })
-export class EditUserComponent implements OnInit{
+export class EditUserComponent{
   EditUserForm: FormGroup;
   item: any;
 
-  constructor (private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private router: Router, private dataTransfertService : DataTranferServiceService){
+  constructor (private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private router: Router){
     this.EditUserForm = this.fb.group({
       mdp: ['', Validators.required],
-      role: ['', Validators.required]
     });
-  }
-
-  ngOnInit(): void {
-    this.item = this.dataTransfertService.getItem();
-    if (this.item) {
-      this.EditUserForm.patchValue({
-        mdp: this.item.mdp_u,
-        role: this.item.role_u
-      });
-    }
   }
 
   onSubmit() {
     if (this.EditUserForm.valid) {
       const userData = {
+        pseudo_u: this.route.snapshot.paramMap.get('id'),
         mdp_u: this.EditUserForm.value.mdp,
-        role_u: this.EditUserForm.value.role
       };
       const headers = new HttpHeaders()
-      this.http.put(`http://localhost:5000/modif_user/${this.route.snapshot.paramMap.get('id')}`, userData, {headers})
+      this.http.put(`http://localhost:5000/modif_user`, userData, {headers})
         .subscribe(
           response => {
             console.log('Utilisateur modifié avec succès', response);
