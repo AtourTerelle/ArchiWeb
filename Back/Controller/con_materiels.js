@@ -34,8 +34,10 @@ exports.materielsDispoByType = async (req, res) => {
 
 exports.materielsReserve = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const reservedMateriel = await Materiel.find({ Reserve_par: userId });
+        const { pseudo_u } = req.body;
+
+        const reservedMateriel = await materiels.find({ reserve_par: pseudo_u });
+
         res.status(200).json(reservedMateriel);
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
