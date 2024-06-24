@@ -5,5 +5,6 @@ module.exports = function(app){
     app.post('/addDemandes', con_demandes.createDemande);
     app.get('/allDemandeEnAttente',con_demandes.getDemandesEnAttente);
     app.put('/reponseDemande', con_demandes.reponseDemande);
+    app.get('/demandeByUser', con_demandes.DemandesByUser);
     
 }

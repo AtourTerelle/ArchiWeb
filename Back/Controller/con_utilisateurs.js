@@ -123,4 +123,23 @@ exports.connexion = async (req, res) => {
         res.status(500).json({ message: 'Erreur du serveur', error: e.message });
     }
 }
+exports.UserInfoFromToken = (req, res) => {
+    try {
+        //const token = req.header('auth-token');
+
+        const { token } = req.body
+
+        console.log(token)
+
+        if (!token) {
+            return res.status(401).json({ message: "Accès refusé" });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+
+        res.status(200).json(decoded);
+    } catch (error) {
+        res.status(400).json({ message: "Token invalide", error: error.message });
+    }
+};
 
