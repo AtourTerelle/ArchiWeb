@@ -3,7 +3,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
