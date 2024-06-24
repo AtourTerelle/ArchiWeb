@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const materielSchema = new mongoose.Schema({
-    id_m: { type: Number, required: true, unique: true },
+    //id_m: { type: Number, required: true, unique: true },
     nom_m: { type: String, required: true },
     type_m: { type: String, required: true },
     reserve_par: { type: Number },

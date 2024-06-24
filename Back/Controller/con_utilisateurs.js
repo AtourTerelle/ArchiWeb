@@ -6,7 +6,6 @@ const utilisateurs = require("../Model/utilisateurs");
 const JWT_SECRET = 'La_clef_pas_cacher_la';
 
 exports.getUser = async (req, res) => {
-
     try {
         const users = await utilisateurs.find();
         res.status(200).json(users);
@@ -47,10 +46,16 @@ exports.modifutilisateurs = async (req, res) => {
 
     try {
 
-        const userId = req.params.id_u;
+        console.log(req.params)
+
+        const userId = req.params._id;
+
         const {newPseudo, newMdp} = req.body;
 
-        const user = await utilisateurs.findOne({ id_u: userId});
+        console.log(req.body)
+
+        const user = await utilisateurs.findOne({ _id: userId});
+        
 
         if (user) {
             return res.status(404).json({message: "Utilisateur non trouvé"})
@@ -66,6 +71,7 @@ exports.modifutilisateurs = async (req, res) => {
         res.status(400).json({message: "Error"});
     }
 }
+
 exports.connexion = async (req, res) => {
 
     try {
