@@ -6,7 +6,6 @@ const utilisateurs = require("../Model/utilisateurs");
 const JWT_SECRET = 'La_clef_pas_cacher_la';
 
 exports.getUser = async (req, res) => {
-
     try {
         const users = await utilisateurs.find();
         res.status(200).json(users);
@@ -46,18 +45,18 @@ exports.addutilisateurs = async (req, res) => {
 exports.modifutilisateurs = async (req, res) => {
 
     try {
+        const {pseudo_u, mdp_u} = req.body;
 
-        const userId = req.params.id_u;
-        const {newPseudo, newMdp} = req.body;
+        const newMdp = mdp_u
 
-        const user = await utilisateurs.findOne({ id_u: userId});
-
-        if (user) {
+        const user = await utilisateurs.findOne({ pseudo_u: pseudo_u});
+        if (!user) {
             return res.status(404).json({message: "Utilisateur non trouvé"})
         }
 
-        user.pseudo_u = newPseudo;
-        user.mpd_u = newMdp;
+        const hashedPassword = await bcrypt.hash(newMdp, 10);
+
+        user.mdp_u = hashedPassword;
 
         await user.save();
 
@@ -66,6 +65,23 @@ exports.modifutilisateurs = async (req, res) => {
         res.status(400).json({message: "Error"});
     }
 }
+
+exports.deleteutilisateurs = async (req, res) => {
+    try {
+        const { pseudo_u } = req.body;
+        const deletedUser = await utilisateurs.findOne({pseudo_u: pseudo_u});
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
+
+        await deletedUser.deleteOne();
+        res.status(200).json({ message: "Utilisateur supprimé avec succès" });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur du serveur", error: error.message });
+    }
+};
+
 exports.connexion = async (req, res) => {
 
     try {
@@ -91,7 +107,7 @@ exports.connexion = async (req, res) => {
 
         // Créer un jeton JWT
         const token = jwt.sign(
-            { id_u: utilisateur.id_u, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
+            { id_u: utilisateur._id, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
             //process.env.JWT_SECRET,
             JWT_SECRET,
             { expiresIn: '1h' }
@@ -102,4 +118,5 @@ exports.connexion = async (req, res) => {
     } catch (e) {
         res.status(500).json({ message: 'Erreur du serveur', error: e.message });
     }
-}    
+}
+

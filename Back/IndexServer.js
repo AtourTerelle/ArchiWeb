@@ -29,6 +29,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/ArchiWeb", {
 /*const utilisateursRouter = require('./Router/rou_utilisateurs');
 app.use('/utilisateurs', utilisateursRouter);*/
 require('./Router/rou_utilisateurs')(app)
+require('./Router/rou_materiels')(app)
 
 srv = http.createServer({
 },app).listen(5000, function () {
