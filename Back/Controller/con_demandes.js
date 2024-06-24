@@ -3,17 +3,26 @@ const materiels = require("../Model/materiels");
 
 exports.createDemande = async (req, res) => {
     try {
-        const { pseudo_u, nom_m, type_d } = req.body;
+        const { pseudo_u, nom_m, type_d, salle} = req.body;
 
-        // Vérifier si le matériel est déjà réservé
+
+        if (type_d == "Attribution"){
+            // Vérifier si le matériel est déjà réservé
         const materiel = await materiels.findOne({nom_m: nom_m});
         if (!materiel) {
             return res.status(404).json({ message: "Matériel non trouvé" });
         }
-        console.log(materiel.reserve_par)
         if (materiel.reserve_par != "Libre") {
             return res.status(400).json({ message: "Matériel déjà réservé" });
         }
+
+        materiel.reserve_par = "Temp"
+        //materiel.salle = salle
+
+        await materiel.save();
+
+        }
+        
 
         // Créer une nouvelle demande
         const newDemande = new demandes({
@@ -26,9 +35,10 @@ exports.createDemande = async (req, res) => {
         const savedDemande = await newDemande.save();
 
         // Mettre à jour l'état du matériel pour indiquer qu'il est réservé
-        materiel.reserve_par = pseudo_u;
+        /*materiel.reserve_par = pseudo_u;
+        materiel.salle = salle;
 
-        await materiel.save();
+        await materiel.save();*/
 
         res.status(201).json(savedDemande);
     } catch (error) {
@@ -58,12 +68,23 @@ exports.reponseDemande = async (req, res) => {
 
         await updatedDemande.save();
 
-        if(etats_d == "Refuse"){
+        if(etats_d == "Refuse" && updatedDemande.type_d == "Attribution"){
             const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
         if (!materiel) {
             return res.status(404).json({ message: "Matériel non trouvé" });
         }
             materiel.reserve_par="Libre"
+            materiel.salle="Reserve"
+            await materiel.save()
+        }
+
+        if(etats_d == "Valide" && updatedDemande.type_d == "Rendu"){
+            const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
+        if (!materiel) {
+            return res.status(404).json({ message: "Matériel non trouvé" });
+        }
+            materiel.reserve_par="Libre"
+            materiel.salle="Reserve"
             await materiel.save()
         }
 
