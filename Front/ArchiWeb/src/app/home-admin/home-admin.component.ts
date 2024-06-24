@@ -18,7 +18,7 @@ export class HomeAdminComponent implements OnInit{
   constructor(private http: HttpClient, private router: Router) { }
   
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:5000/materielsDispo').subscribe((response: any[]) => {
+    this.http.get<any[]>('http://localhost:5000/allMateriel').subscribe((response: any[]) => {
       this.dataAllMaterials = response;
     });
   }

@@ -28,7 +28,6 @@ export class AddMaterielComponent {
       const userData = {
         nom_m: this.addMaterialForm.value.name,
         type_m: this.addMaterialForm.value.type,
-        salle: "Reserve"
       };
       const headers = new HttpHeaders()
       this.http.post('http://localhost:5000/addMateriels', userData, {headers})
