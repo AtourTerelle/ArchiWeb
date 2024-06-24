@@ -13,10 +13,15 @@
         </div>
     </header>
     <body>
-        <nav>
-            <a routerLink="/home/Users">Les utilisateurs</a>
-            <a routerLink="/home/AddMaterials">Créer matériel</a>
-        </nav>
+        <div class="containerAdmin">
+            <div class="headerAdmin">
+                <h2>Actions</h2>
+            </div>
+            <div class="button-containerAdmin">
+                <button class="action-buttonAdmin" routerLink="/home/Users">Gerer les utilisateurs</button>
+                <button class="action-buttonAdmin" routerLink="/home/AddMaterials">Création d'un matériel</button>
+            </div>
+        </div>
         <div class="container">
             <div class="header">
                 <img src="assets/images/MR.png" alt="Icon Matériels" class="icon">
