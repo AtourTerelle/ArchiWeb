@@ -16,8 +16,6 @@ export class AddUserComponent {
 
   addUserForm: FormGroup;
 
-  Name: string = "Milo Pauchet"
-
   constructor (private fb: FormBuilder, private http: HttpClient, private router: Router){
     this.addUserForm = this.fb.group({
       pseudo: ['', Validators.required],
