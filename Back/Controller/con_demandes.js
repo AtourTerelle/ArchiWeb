@@ -16,7 +16,7 @@ exports.createDemande = async (req, res) => {
                 return res.status(400).json({ message: "Matériel déjà réservé" });
             }
 
-            materiel.reserve_par = "Temp"
+            materiel.reserve_par = "Temp_A"
             //materiel.salle = salle
 
             await materiel.save();
@@ -36,6 +36,15 @@ exports.createDemande = async (req, res) => {
         }
         
         if (type_d == "Retour"){
+
+            const materiel = await materiels.findOne({nom_m: nom_m});
+            if (!materiel) {
+                return res.status(404).json({ message: "Matériel non trouvé" });
+            }
+
+            materiel.reserve_par = "Temp_R"
+
+            await materiel.save();
 
             // Créer une nouvelle demande
             const newDemande = new demandes({
@@ -108,7 +117,18 @@ exports.reponseDemande = async (req, res) => {
     
                 await materiel.save()
             }
-            
+
+            if(updatedDemande.type_d == "Retour" && etats_d == "Refuse"){
+                const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
+                if (!materiel) {
+                    return res.status(404).json({ message: "Matériel non trouvé" });
+                }
+    
+                materiel.reserve_par = updatedDemande.user_pseudo
+    
+                await materiel.save()
+            }
+    
             updatedDemande.etats_d=etats_d
 
             await updatedDemande.save();
