@@ -14,12 +14,17 @@ import { Router, RouterLink } from '@angular/router';
 
 export class HomeAdminComponent implements OnInit{
   dataAllMaterials: any[] = [];
+  dataTickets: any[] = [];
 
   constructor(private http: HttpClient, private router: Router) { }
   
   ngOnInit(): void {
     this.http.get<any[]>('http://localhost:5000/allMateriel').subscribe((response: any[]) => {
       this.dataAllMaterials = response;
+    });
+
+    this.http.get<any[]>('http://localhost:5000/allDemandeEnAttente').subscribe((response: any[]) => {
+      this.dataTickets = response;
     });
   }
 
