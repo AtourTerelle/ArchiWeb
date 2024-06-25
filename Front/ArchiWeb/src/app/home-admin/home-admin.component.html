@@ -58,7 +58,7 @@
                         <tr *ngFor="let item of dataTickets">
                             <td>{{item.materiel_nom}}</td>
                             <td>{{item.type_d}}</td>
-                            <td>{{item.etats_d}}</td>
+                            <td (click)="popUp(item._id)">{{item.etats_d}}</td>
                         </tr>
                     </tbody>
                 </table>

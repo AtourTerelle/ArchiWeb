@@ -7,19 +7,18 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ConnexionComponent, HttpClientModule,RouterLink],
+  imports: [RouterOutlet,RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'ArchiWeb';
-  Name: string = "Milo Pauchet"
+  Name: string = localStorage.getItem("name") || "erreurName";
 
   constructor(private router: Router) { }
 
   Deco(): void {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("role");
+    localStorage.clear();
     this.router.navigate(['']);
   }
 }

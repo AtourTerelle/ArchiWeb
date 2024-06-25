@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
+import { ValidationPopUpComponent } from '../validation-pop-up/validation-pop-up.component';
 
 @Component({
   selector: 'app-home-admin',
@@ -16,7 +18,7 @@ export class HomeAdminComponent implements OnInit{
   dataAllMaterials: any[] = [];
   dataTickets: any[] = [];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.http.get<any[]>('http://localhost:5000/allMateriel').subscribe((response: any[]) => {
@@ -45,5 +47,13 @@ export class HomeAdminComponent implements OnInit{
         console.error('Erreur lors de la suppression du matériel', error);
       }
     );
+  }
+
+  popUp(materialid: string){
+    this.dialog.open(ValidationPopUpComponent, {
+      width: '500px',
+      height: '300px',
+      data: {id : materialid}
+    })
   }
 }

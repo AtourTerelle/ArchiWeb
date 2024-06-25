@@ -7,13 +7,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-connexion',
   standalone: true,
-  imports: [ConnexionComponent, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.css'
 })
 
 export class ConnexionComponent {
-  test: string = "Bonjour tout le monde !"
 
   connexionForm: FormGroup;
 
@@ -40,11 +39,8 @@ export class ConnexionComponent {
             if(response.token && response.role){
               localStorage.setItem('authToken', response.token);
               localStorage.setItem('role', response.role);
-              if (response.role == "admin"){
-                this.router.navigate(['home'])
-              }else{
-                this.router.navigate(['home/Users'])
-              }
+              localStorage.setItem('name', response.name);
+              this.router.navigate(['home']);
               console.log('connexion reussi', response);
             }
             else{
@@ -67,8 +63,4 @@ export class ConnexionComponent {
         );
     }
   }
-  /*form = {
-      identifiant : null,
-      password: null
-  }*/
 }
