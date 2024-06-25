@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>Validation du ticket {{data.name}}</h2>
+    <form [formGroup]="validationTicket" (ngSubmit)="submit()">
+        <label for="ChooseTicket">Faites votre choix</label>
+        <select id="ChooseTicket" formControlName="choice">
+            <option value="" selected>-- choisir une option --</option>
+            <option value="Refuse">Refusé</option>
+            <option value="Accepte">Accepté</option>
+        </select>
+        
+        <button type="submit">Envoyé</button>
+    </form>
+    <button (click)="close()">Retour</button>
+</div>

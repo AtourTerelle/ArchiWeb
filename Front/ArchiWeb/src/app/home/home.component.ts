@@ -25,31 +25,33 @@ export class HomeComponent implements OnInit{
       this.dataLibre = response;
     });
 
-    this.http.get<any[]>('http://localhost:5000/materielReserve').subscribe((response: any[]) => {
+    const userData = {
+      pseudo_u: localStorage.getItem("name")
+    };
+
+    this.http.post<any[]>('http://localhost:5000/materielReserve', userData, {headers: new HttpHeaders()}).subscribe((response: any[]) => {
       this.dataReserve = response;
     });
 
-    
-    const userData = {
-      pseudo_u: 'Milo'
-    };
-
     this.http.post<any[]>('http://localhost:5000/demandeByUser', userData, {headers: new HttpHeaders()}).subscribe((response: any[]) => {
       this.dataTickets = response;
-      console.log(response)
     });
   }
 
   reserveItem(item: any) {
-    this.dataTransferService.setItem(item);
     this.dialog.open(RequestPopUpComponent, {
       width: '500px',
       height: '300px',
-      data: {name : item.nom_m}
+      data: {name : item.nom_m, request: "Attribution"}
     })
   }
 
-  retourItem(item: string){
-    console.log("retour :", item);
+  retourItem(item: any){
+    console.log(item.nom_m)
+    this.dialog.open(RequestPopUpComponent, {
+      width: '500px',
+      height: '300px',
+      data: {name : item.nom_m, request: "Retour"}
+    })
   }
 }

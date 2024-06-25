@@ -27,10 +27,10 @@ export class RequestPopUpComponent {
   submit(): void {
     if (this.addDemandeForm.valid){
       const userData = {
-        //salle: this.addDemandeForm.value.salle,
+        salle_d: this.addDemandeForm.value.salle,
         nom_m: this.data.name,
-        pseudo_u: "Milo",
-        type_d: "Reservation"
+        pseudo_u: localStorage.getItem("name"),
+        type_d: this.data.request
       };
       const headers = new HttpHeaders();
       this.http.post('http://localhost:5000/addDemandes', userData, {headers})
@@ -38,6 +38,7 @@ export class RequestPopUpComponent {
           response => {
             console.log('Demande ajouté avec succès', response);
             this.dialogRef.close();
+            window.location.reload();
           },
           error => {
             console.error('Erreur lors de l\'ajout de la demande', error);
