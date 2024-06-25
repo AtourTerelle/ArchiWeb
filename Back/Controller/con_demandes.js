@@ -77,8 +77,7 @@ exports.DemandesByUser = async (req, res) => {
     try {
         const {pseudo_u} = req.body;
 
-        const demandesByUser = await demandes.find({ user_pseudo: pseudo_u })
-
+        const demandesByUser = await demandes.find({ user_pseudo: pseudo_u });
         res.status(200).json(demandesByUser);
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });

@@ -27,9 +27,10 @@ export class RequestPopUpComponent {
   submit(): void {
     if (this.addDemandeForm.valid){
       const userData = {
-        salle: this.addDemandeForm.value.pseudo,
+        //salle: this.addDemandeForm.value.salle,
         nom_m: this.data.name,
-        pseudo_u: "Milo"
+        pseudo_u: "Milo",
+        type_d: "Reservation"
       };
       const headers = new HttpHeaders();
       this.http.post('http://localhost:5000/addDemandes', userData, {headers})

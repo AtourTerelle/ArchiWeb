@@ -50,35 +50,15 @@
                     <thead>
                         <tr>
                             <th>Nom du matériel concerné</th>
-                            <th>Commentaire</th>
+                            <th>Type</th>
                             <th>Etat</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>HP-GAMING-01</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Valide.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-02</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Attente.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-03</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/refuse.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-04</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/Valide.png" alt="Retour matériel" class="action-icon"></td>
-                        </tr>
-                        <tr>
-                            <td>HP-GAMING-05</td>
-                            <td>Ordinateur</td>
-                            <td><img src="assets/images/refuse.png" alt="Retour matériel" class="action-icon"></td>
+                        <tr *ngFor="let item of dataTickets">
+                            <td>{{item.materiel_nom}}</td>
+                            <td>{{item.type_d}}</td>
+                            <td>{{item.etats_d}}</td>
                         </tr>
                     </tbody>
                 </table>
