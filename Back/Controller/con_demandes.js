@@ -3,34 +3,53 @@ const materiels = require("../Model/materiels");
 
 exports.createDemande = async (req, res) => {
     try {
-        const { pseudo_u, nom_m, type_d } = req.body;
+        const { pseudo_u, nom_m, type_d, salle_d} = req.body;
 
-        // Vérifier si le matériel est déjà réservé
-        const materiel = await materiels.findOne({nom_m: nom_m});
-        if (!materiel) {
-            return res.status(404).json({ message: "Matériel non trouvé" });
+
+        if (type_d == "Attribution"){
+                // Vérifier si le matériel est déjà réservé
+            const materiel = await materiels.findOne({nom_m: nom_m});
+            if (!materiel) {
+                return res.status(404).json({ message: "Matériel non trouvé" });
+            }
+            if (materiel.reserve_par != "Libre") {
+                return res.status(400).json({ message: "Matériel déjà réservé" });
+            }
+
+            materiel.reserve_par = "Temp"
+            //materiel.salle = salle
+
+            await materiel.save();
+
+            // Créer une nouvelle demande
+            const newDemande = new demandes({
+                user_pseudo: pseudo_u,
+                materiel_nom: nom_m,
+                type_d: type_d,
+                salle_d: salle_d
+            });
+
+            const savedDemande = await newDemande.save();
+
+            res.status(201).json(savedDemande);
+
         }
-        console.log(materiel.reserve_par)
-        if (materiel.reserve_par != "Libre") {
-            return res.status(400).json({ message: "Matériel déjà réservé" });
+        
+        if (type_d == "Retour"){
+
+            // Créer une nouvelle demande
+            const newDemande = new demandes({
+                user_pseudo: pseudo_u,
+                materiel_nom: nom_m,
+                type_d: type_d,
+                //en_attente: true
+            });
+
+            const savedDemande = await newDemande.save();
+
+            res.status(201).json(savedDemande);
         }
-
-        // Créer une nouvelle demande
-        const newDemande = new demandes({
-            user_pseudo: pseudo_u,
-            materiel_nom: nom_m,
-            type_d: type_d,
-            //en_attente: true
-        });
-
-        const savedDemande = await newDemande.save();
-
-        // Mettre à jour l'état du matériel pour indiquer qu'il est réservé
-        materiel.reserve_par = pseudo_u;
-
-        await materiel.save();
-
-        res.status(201).json(savedDemande);
+        
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
@@ -54,20 +73,51 @@ exports.reponseDemande = async (req, res) => {
             return res.status(404).json({ message: "Demande non trouvée" });
         }
 
-        updatedDemande.etats_d=etats_d
+        if(updatedDemande.etats_d == "EnAttente"){
+            if(updatedDemande.type_d == "Attribution" && etats_d == "Accepte"){
+                const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
+                if (!materiel) {
+                    return res.status(404).json({ message: "Matériel non trouvé" });
+                }
+    
+                materiel.reserve_par = updatedDemande.user_pseudo
+                materiel.salle = updatedDemande.salle_d
+    
+                await materiel.save()
+            }
+    
+            if(updatedDemande.type_d == "Attribution" && etats_d == "Refuse"){
+                const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
+                if (!materiel) {
+                    return res.status(404).json({ message: "Matériel non trouvé" });
+                }
+    
+                materiel.reserve_par = "Libre"
+    
+                await materiel.save()
+            }
+    
+            if(updatedDemande.type_d == "Retour" && etats_d == "Accepte"){
+                const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
+                if (!materiel) {
+                    return res.status(404).json({ message: "Matériel non trouvé" });
+                }
+    
+                materiel.reserve_par = "Libre"
+                materiel.salle = "Reserve"
+    
+                await materiel.save()
+            }
+    
+            updatedDemande.etats_d=etats_d
+    
+            await updatedDemande.save();
 
-        await updatedDemande.save();
-
-        if(etats_d == "Refuse"){
-            const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
-        if (!materiel) {
-            return res.status(404).json({ message: "Matériel non trouvé" });
+            res.status(200).json(updatedDemande);
+        }else{
+            res.status(500).json({ message: "Demande pas en Attente"});
         }
-            materiel.reserve_par="Libre"
-            await materiel.save()
-        }
 
-        res.status(200).json(updatedDemande);
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
