@@ -94,7 +94,8 @@ exports.connexion = async (req, res) => {
         
         // Trouver l'utilisateur par e-mail
         const utilisateur = await utilisateurs.findOne({pseudo_u: pseudo_u});
-        const role = utilisateur.role_u
+        const role = utilisateur.role_u;
+        const name = utilisateur.pseudo_u;
 
         if (!utilisateur) {
             return res.status(401).json({ message: 'Utilisateur inexistant' });
@@ -106,8 +107,6 @@ exports.connexion = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ message: 'mot de passe incorect' });
         }
-        
-        console.log("test 3");
 
         // Créer un jeton JWT
         const token = jwt.sign(
@@ -118,7 +117,7 @@ exports.connexion = async (req, res) => {
         );
         
         //res.status(200).json({utilisateur, token});
-        return res.status(200).send({token, role})
+        return res.status(200).send({token, role, name})
     } catch (e) {
         res.status(500).json({ message: 'Erreur du serveur', error: e.message });
     }

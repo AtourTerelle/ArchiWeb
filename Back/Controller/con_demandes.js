@@ -67,12 +67,12 @@ exports.getDemandesEnAttente = async (req, res) => {
 exports.reponseDemande = async (req, res) => {
     try {
         const { _id, etats_d } = req.body;
-
+        
         const updatedDemande = await demandes.findById({_id})
         if (!updatedDemande) {
             return res.status(404).json({ message: "Demande non trouvée" });
         }
-
+        
         if(updatedDemande.etats_d == "EnAttente"){
             if(updatedDemande.type_d == "Attribution" && etats_d == "Accepte"){
                 const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
@@ -85,7 +85,7 @@ exports.reponseDemande = async (req, res) => {
     
                 await materiel.save()
             }
-    
+
             if(updatedDemande.type_d == "Attribution" && etats_d == "Refuse"){
                 const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
                 if (!materiel) {
@@ -96,7 +96,7 @@ exports.reponseDemande = async (req, res) => {
     
                 await materiel.save()
             }
-    
+            
             if(updatedDemande.type_d == "Retour" && etats_d == "Accepte"){
                 const materiel = await materiels.findOne({nom_m: updatedDemande.materiel_nom});
                 if (!materiel) {
@@ -108,11 +108,11 @@ exports.reponseDemande = async (req, res) => {
     
                 await materiel.save()
             }
-    
+            
             updatedDemande.etats_d=etats_d
-    
-            await updatedDemande.save();
 
+            await updatedDemande.save();
+            
             res.status(200).json(updatedDemande);
         }else{
             res.status(500).json({ message: "Demande pas en Attente"});
