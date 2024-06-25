@@ -6,7 +6,7 @@ const demandeSchema = new mongoose.Schema({
     materiel_nom: { type: String, required: true },
     type_d: { type: String, required: true },
     etats_d: { type: String, required: true, default: "EnAttente" },
-    salle_d: { type: String, default: "default"}
+    salle_d: { type: String /*default: "default"*/}
 });
 
 module.exports = mongoose.model('demandes', demandeSchema);
