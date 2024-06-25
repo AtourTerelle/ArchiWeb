@@ -41,7 +41,6 @@ export class ConnexionComponent {
               localStorage.setItem('role', response.role);
               localStorage.setItem('name', response.name);
               this.router.navigate(['home']);
-              console.log('connexion reussi', response);
             }
             else{
               console.error('Erreur lors de la connexion');

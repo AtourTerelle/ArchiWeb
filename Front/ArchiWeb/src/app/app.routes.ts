@@ -13,11 +13,11 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 
 export const routes: Routes = [
     {path:'', component: ConnexionComponent},
-    {path:'home', component: (() => {return localStorage.getItem("role") === "admin" ? HomeAdminComponent : HomeComponent}) ()},
+    {path:'home', loadComponent: () => {return AdminGuard()? HomeAdminComponent : HomeComponent}},
     {path:'home/Users', component: UserPanelComponent},
     {path:'home/Users/Add', component: AddUserComponent},
     {path:'home/Users/Edit/:id', component: EditUserComponent},
     {path:'home/AddMaterials', component: AddMaterielComponent},
-    {path:'home/profil', component: ProfilComponent, canActivate:[isConnectedGuard]},
+    {path:'home/profil/:id', component: ProfilComponent, canActivate:[isConnectedGuard]},
     {path:'**', component: ErrorComponent}
 ];

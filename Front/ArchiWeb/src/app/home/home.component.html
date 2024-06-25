@@ -39,6 +39,15 @@
                 <img src="assets/images/MD.png" alt="Icon Matériels" class="icon">
                 <h2>Les matériels disponibles</h2>
             </div>
+            <form>
+                <label for="filtre">Filtre</label>
+                <select id="filtre" (change)="filtre($event)">
+                    <option value="" selected>Pas de filtre</option>
+                    <option value="ordinateur">Ordinateur</option>
+                    <option value="imprimante">Imprimante</option>
+                    <option value="meuble">Meuble</option>
+                </select>
+            </form>
             <div class="content">
                 <table class="material-tableBlue">
                     <thead>

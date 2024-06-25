@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-request-pop-up',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './request-pop-up.component.html',
   styleUrl: './request-pop-up.component.css'
 })
@@ -16,7 +17,7 @@ export class RequestPopUpComponent {
 
   constructor(private http: HttpClient, private fb: FormBuilder, public dialogRef: MatDialogRef<RequestPopUpComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.addDemandeForm = this.fb.group({
-      salle: ['', Validators.required],
+      salle: [''],
     });
   }
 

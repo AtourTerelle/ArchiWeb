@@ -49,6 +49,26 @@ export class HomeAdminComponent implements OnInit{
     );
   }
 
+  filtre(event: Event){
+    const target = event.target as HTMLButtonElement;
+    switch(target.value){
+      case "":
+        this.http.get<any[]>('http://localhost:5000/allMateriel').subscribe((response: any[]) => {
+          this.dataAllMaterials = response;
+        });
+        break;
+      default:
+        const data = {
+          type_m: target.value
+        }
+        this.http.post<any[]>('http://localhost:5000/materielsDispoByType',data).subscribe((response: any[]) => {
+          console.log(response)
+          this.dataAllMaterials = response;
+        });
+        break;
+    }
+  }
+
   popUp(materialid: string){
     this.dialog.open(ValidationPopUpComponent, {
       width: '500px',
