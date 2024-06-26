@@ -5,7 +5,6 @@ exports.createDemande = async (req, res) => {
     try {
         const { pseudo_u, nom_m, type_d, salle_d} = req.body;
 
-
         if (type_d == "Attribution"){
                 // Vérifier si le matériel est déjà réservé
             const materiel = await materiels.findOne({nom_m: nom_m});
@@ -17,7 +16,6 @@ exports.createDemande = async (req, res) => {
             }
 
             materiel.reserve_par = "Temp_A"
-            //materiel.salle = salle
 
             await materiel.save();
 
@@ -51,7 +49,6 @@ exports.createDemande = async (req, res) => {
                 user_pseudo: pseudo_u,
                 materiel_nom: nom_m,
                 type_d: type_d,
-                //en_attente: true
             });
 
             const savedDemande = await newDemande.save();
@@ -66,7 +63,7 @@ exports.createDemande = async (req, res) => {
 
 exports.getDemandesEnAttente = async (req, res) => {
     try {
-        const demandesEnAttente = await demandes.find({ etats_d: "EnAttente" })//.populate('user').populate('materiel');
+        const demandesEnAttente = await demandes.find({ etats_d: "EnAttente" })
         res.status(200).json(demandesEnAttente);
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });

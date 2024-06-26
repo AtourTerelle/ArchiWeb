@@ -74,8 +74,6 @@ exports.deleteMateriels = async (req, res) => {
     try {
         const { nom_m } = req.body;
  
-        //const deletedMateriel = await Materiel.findByIdAndDelete(id);
-
         const deletedMateriel = await materiels.findOne({nom_m: nom_m});
         if (!deletedMateriel) {
             return res.status(404).json({ message: "Matériel non trouvé" });
@@ -87,19 +85,3 @@ exports.deleteMateriels = async (req, res) => {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
 };
-
-// Exemple avec id
-
-/*exports.materielsDispo = async (req, res) => {
-    try {
-        const _id = req.body._id
-
-        console.log(_id)
-
-        //const materieldispo = await materiels.find({ Reserve_par: null });
-        const materieldispo = await materiels.findById({_id});
-        res.status(200).json(materieldispo);
-    } catch (error) {
-        res.status(500).json({ message: "Erreur du serveur", error: error.message });
-    }
-};*/

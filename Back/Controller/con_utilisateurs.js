@@ -111,12 +111,10 @@ exports.connexion = async (req, res) => {
         // Créer un jeton JWT
         const token = jwt.sign(
             { id_u: utilisateur._id, pseudo_u: utilisateur.pseudo_u, role_u: utilisateur.role_u },
-            //process.env.JWT_SECRET,
             JWT_SECRET,
             { expiresIn: '1h' }
         );
         
-        //res.status(200).json({utilisateur, token});
         return res.status(200).send({token, role, name})
     } catch (e) {
         res.status(500).json({ message: 'Erreur du serveur', error: e.message });
@@ -124,7 +122,6 @@ exports.connexion = async (req, res) => {
 }
 exports.UserInfoFromToken = (req, res) => {
     try {
-        //const token = req.header('auth-token');
 
         const { token } = req.body
 
