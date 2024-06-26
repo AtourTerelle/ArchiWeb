@@ -2,6 +2,7 @@ import { CanActivateFn } from '@angular/router';
 import { Router } from '@angular/router';
 
 export const AdminGuard = () => {
+
   const role = localStorage.getItem('role');
 
   if(role==="admin"){

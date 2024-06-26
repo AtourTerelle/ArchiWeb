@@ -95,7 +95,17 @@
                         <tr *ngFor="let item of dataTickets">
                             <td>{{item.materiel_nom}}</td>
                             <td>{{item.type_d}}</td>
-                            <td>{{item.etats_d}}</td>
+                            <td>
+                                <ng-container *ngIf="item.etats_d === 'Accepte'">
+                                    <img src="assets/images/Valide.png" alt="Retour matériel" class="action-icon">
+                                </ng-container>
+                                <ng-container *ngIf="item.etats_d === 'EnAttente'">
+                                    <img src="assets/images/Attente.png" alt="Retour matériel" class="action-icon">
+                                </ng-container>
+                                <ng-container *ngIf="item.etats_d === 'Refuse'">
+                                    <img src="assets/images/refuse.png" alt="Retour matériel" class="action-icon">
+                                </ng-container>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

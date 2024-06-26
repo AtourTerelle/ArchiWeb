@@ -3,11 +3,12 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { HttpClient, HttpHeaders, provideHttpClient} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-connexion',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.css'
 })
@@ -15,6 +16,8 @@ import { Router } from '@angular/router';
 export class ConnexionComponent {
 
   connexionForm: FormGroup;
+
+  erreur: boolean = false;
 
   constructor (private fb: FormBuilder, private http: HttpClient, private router: Router){
     this.connexionForm = this.fb.group({
@@ -34,31 +37,19 @@ export class ConnexionComponent {
       const headers = new HttpHeaders()
       
       this.http.post<any>('http://localhost:5000/connexion', userData, {headers})
-        .subscribe({
-          next: (response) => {
-            if(response.token && response.role){
-              localStorage.setItem('authToken', response.token);
-              localStorage.setItem('role', response.role);
-              localStorage.setItem('name', response.name);
-              this.router.navigate(['home']);
+          .subscribe(
+            response => {
+              if(response.token && response.role){
+                localStorage.setItem('authToken', response.token);
+                localStorage.setItem('role', response.role);
+                localStorage.setItem('name', response.name);
+                this.router.navigate(['home']);
+              }
+              
+            },
+            error => {
+              this.erreur = true;
             }
-            else{
-              console.error('Erreur lors de la connexion');
-            }
-          },
-        }
-          /*response => {
-            if(response.token)
-              response.json()
-            console.log(response);
-            console.log(response.token);
-            //localStorage.setItem('authToken', response.token);
-
-            console.log('connexion reussi', response);
-          },
-          error => {
-            console.error('Erreur lors de la connexion', error);
-          }*/
         );
     }
   }

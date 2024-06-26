@@ -97,3 +97,25 @@ form .button {
     height: 40px;
     border-radius: 8px;
 }
+
+.button-containerAdmin {
+    padding: 20px;
+}
+
+.action-buttonAdmin {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-buttonAdmin:hover {
+    background-color: #45a049;
+}
