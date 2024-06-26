@@ -13,4 +13,6 @@ export class DataTranferServiceService {
   getItem(): any {
     return this.item;
   }
+
+  
 }

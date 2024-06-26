@@ -1,19 +1,19 @@
 <div>
     <body>
-        <a routerLink="/home" class="Retour">Retour</a>
+        <nav>
+            <div class="button-containerAdmin">
+                <button class="action-buttonAdmin" routerLink="/home">Retour</button>
+            </div>
+        </nav>
         <div class="container">
             <div class="header">
                 <img src="assets/images/Profil.png" alt="Icon Matériels" class="icon">
                 <h2>Mon profil</h2>
             </div>
-            <form>
-                <div class="Field">
-                    <h3>Nom d'utilisateur</h3>
-                    <input type="text" value="{{Pseudo}}"/>
-                </div>
+            <form [formGroup]="EditUserForm" (ngSubmit) = "onSubmit()">
                 <div class="Field">
                     <h3>Mot de passe</h3>
-                    <input type="text" value="{{MDP}}"/>
+                    <input type="text" formControlName="mdp"/>
                 </div>
                 <input type="submit" class="button" value="Modifier le profil"/>
             </form>

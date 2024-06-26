@@ -39,6 +39,15 @@
                 <img src="assets/images/MD.png" alt="Icon Matériels" class="icon">
                 <h2>Les matériels disponibles</h2>
             </div>
+            <form>
+                <label for="filtre">Filtre</label>
+                <select id="filtre" (change)="filtre($event)">
+                    <option value="" selected>Pas de filtre</option>
+                    <option value="ordinateur">Ordinateur</option>
+                    <option value="imprimante">Imprimante</option>
+                    <option value="meuble">Meuble</option>
+                </select>
+            </form>
             <div class="content">
                 <table class="material-tableBlue">
                     <thead>
@@ -86,7 +95,17 @@
                         <tr *ngFor="let item of dataTickets">
                             <td>{{item.materiel_nom}}</td>
                             <td>{{item.type_d}}</td>
-                            <td>{{item.etats_d}}</td>
+                            <td>
+                                <ng-container *ngIf="item.etats_d === 'Accepte'">
+                                    <img src="assets/images/Valide.png" alt="Retour matériel" class="action-icon">
+                                </ng-container>
+                                <ng-container *ngIf="item.etats_d === 'EnAttente'">
+                                    <img src="assets/images/Attente.png" alt="Retour matériel" class="action-icon">
+                                </ng-container>
+                                <ng-container *ngIf="item.etats_d === 'Refuse'">
+                                    <img src="assets/images/refuse.png" alt="Retour matériel" class="action-icon">
+                                </ng-container>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

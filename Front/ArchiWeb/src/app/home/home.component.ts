@@ -47,11 +47,30 @@ export class HomeComponent implements OnInit{
   }
 
   retourItem(item: any){
-    console.log(item.nom_m)
     this.dialog.open(RequestPopUpComponent, {
       width: '500px',
-      height: '300px',
+      height: '150px',
       data: {name : item.nom_m, request: "Retour"}
     })
+  }
+
+  filtre(event: Event){
+    const target = event.target as HTMLButtonElement;
+    switch(target.value){
+      case "":
+        this.http.get<any[]>('http://localhost:5000/allMateriel').subscribe((response: any[]) => {
+          this.dataLibre = response;
+        });
+        break;
+      default:
+        const data = {
+          type_m: target.value
+        }
+        this.http.post<any[]>('http://localhost:5000/materielsDispoByType',data).subscribe((response: any[]) => {
+          console.log(response)
+          this.dataLibre = response;
+        });
+        break;
+    }
   }
 }

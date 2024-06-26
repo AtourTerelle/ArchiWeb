@@ -26,7 +26,7 @@ exports.materielsDispoByType = async (req, res) => {
         console.log(materielsdispo)
 
 
-        res.status(200).json({message: "Success", materielsdispo});
+        res.status(200).json(materielsdispo);
     } catch (error) {
         res.status(500).json({ message: "Erreur du serveur", error: error.message });
     }
